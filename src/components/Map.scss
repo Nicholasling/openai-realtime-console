@@ -7,3 +7,13 @@
     width: 100%;
   }
 }
+.map-container {
+  width: 100%;
+  height: 60vh; /* Take 60% of the viewport height */
+}
+
+@media only screen and (max-width: 600px) {
+  .map-container {
+    height: 300px; /* Set a fixed height for smaller screens */
+  }
+}

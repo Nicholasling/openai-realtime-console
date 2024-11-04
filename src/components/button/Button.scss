@@ -3,7 +3,7 @@
   align-items: center;
   gap: 8px;
   font-family: 'Roboto Mono', monospace;
-  font-size: 12px;
+  font-size: 12px; /* Base font size */
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -79,5 +79,24 @@
     svg {
       fill: currentColor;
     }
+  }
+
+  /* Add responsive styles */
+  @media (max-width: 768px) {
+    font-size: 14px; /* Slightly larger font size for better readability on mobile */
+    padding: 12px 20px; /* Adjust padding to make buttons larger and more tappable */
+    min-height: 48px; /* Increase height for better touch targets */
+    gap: 10px; /* Increase gap slightly for mobile */
+
+    .icon svg {
+      width: 20px; /* Increase icon size slightly on mobile for better visibility */
+      height: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    font-size: 16px; /* Even larger font for very small screens */
+    padding: 14px 24px; /* Make buttons bigger on very small screens */
+    min-height: 50px; /* Ensure buttons are large enough for touch interaction */
   }
 }

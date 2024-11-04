@@ -712,7 +712,9 @@ export function ConsolePage() {
             <div className="content-block-body full">
               {coords && (
                 <Map
-                  center={[coords.lat, coords.lng]}
+                  // center={[coords.lat, coords.lng]}
+                  initialCenter={[coords.lat, coords.lng]}
+
                   location={coords.location}
                 />
               )}

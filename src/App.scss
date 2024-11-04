@@ -3,3 +3,44 @@
   width: 100%;
   position: relative;
 }
+
+/* App.scss */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row; /* On larger screens, make it horizontal */
+  }
+}
+
+/* App.scss */
+
+.time-display, .distance-display {
+  font-size: 4vw; /* Dynamically sized based on viewport width */
+}
+
+@media (min-width: 768px) {
+  .time-display, .distance-display {
+    font-size: 2rem; /* Fixed size for larger screens */
+  }
+}
+
+/* Example layout adjustment for stats */
+.stats-container {
+  display: flex;
+  flex-direction: row; /* Horizontal on large screens */
+  justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+  .stats-container {
+    flex-direction: column; /* Stack vertically on mobile */
+    align-items: center;
+  }
+}
