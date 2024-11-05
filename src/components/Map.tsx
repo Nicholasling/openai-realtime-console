@@ -45,13 +45,14 @@ export function Map({
   }, []);
 
   return (
-    <div data-component="Map">
+    <div data-component="Map" className="map-container">
       <MapContainer
         center={position} // Dynamically update the map's center based on user's location
         zoom={13}
         scrollWheelZoom={false}
         zoomControl={false}
         attributionControl={false}
+        style={{ height: '300px', width: '100%', maxWidth: '500px' }} // Set custom dimensions for the map
       >
         <ChangeView center={position} zoom={13} />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

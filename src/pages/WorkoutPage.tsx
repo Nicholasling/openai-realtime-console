@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Map } from '../components/Map'; // Assuming you already have this component
+//import { Map } from '../components/Map'; // Assuming you already have this component
 import { Button } from '../components/button/Button';
 
 const WorkoutPage = () => {
@@ -38,22 +38,27 @@ const WorkoutPage = () => {
     setIsPaused(!isPaused); // Toggle pause state
   };
 
+  // const handleStop = () => {
+  //   setIsPaused(true); // Stop the workout
+  //   // Add logic to save the workout here
+  // };
+
   const handleStop = () => {
-    setIsPaused(true); // Stop the workout
-    // Add logic to save the workout here
+    // Save workout and go to history screen
+    history.push('/history');
   };
 
   return (
     <div>
-      {/* Only render the map if the user's location has been retrieved */}
+      {/* Only render the map if the user's location has been retrieved
       {hasLocation ? (
         <Map initialCenter={initialCenter} /> // Pass the initialCenter prop to the Map
       ) : (
         <p>Fetching your location...</p> // Display a message while fetching location
-      )}
+      )} */}
       <div>
         <h3>Workout Progress</h3>
-        <p>Time: {time} seconds</p>
+        <p>Time: {time} s</p>
         <p>Distance: {distance.toFixed(2)} km</p>
         <Button onClick={handlePause} label={isPaused ? 'Resume' : 'Pause'} />
         <Button onClick={handleStop} label="Stop" />
