@@ -1,44 +1,60 @@
+import React, { useEffect, useState } from 'react';
 
-import React from 'react';
+type Run = {
+  id: number;
+  runName: string;
+  time: number;
+  distance: number;
+};
 
-const RunHistory = () => {
-  // For PoC, using mock data for saved runs
-  const runs = [
-    {
-      id: 1,
-      name: 'Pete_Run1',
-      distance: 3.45,
-      pace: 8.12,
-      time: '15:67',
-      heartRateZone: 'Zone 2',
-      date: '2024-11-02',
-    },
-    {
-      id: 2,
-      name: 'Pete_Run2',
-      distance: 2.45,
-      pace: 7.12,
-      time: '12:34',
-      heartRateZone: 'Zone 3',
-      date: '2024-11-04',
-    },
-  ];
+const RunHistoryPage = () => {
+  const [runs, setRuns] = useState<Run[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchRuns = async () => {
+      try {
+        const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs');
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const data: Run[] = await response.json();
+        setRuns(data);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRuns();
+  }, []);
+
+  if (loading) {
+    return <p>Loading run history...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div>
-      <h2>Run History</h2>
-      {runs.map((run) => (
-        <div key={run.id}>
-          <h3>{run.name}</h3>
-          <p>Date: {run.date}</p>
-          <p>Distance: {run.distance} km</p>
-          <p>Pace: {run.pace} min/km</p>
-          <p>Time: {run.time}</p>
-          <p>Heart Rate Zone: {run.heartRateZone}</p>
-        </div>
-      ))}
+      <h1>Run History</h1>
+      <ul>
+        {runs.length > 0 ? (
+          runs.map((run) => (
+            <li key={run.id}>
+              <strong>{run.runName}</strong> - Time: {run.time} seconds, Distance: {run.distance} km
+            </li>
+          ))
+        ) : (
+          <p>No runs recorded yet.</p>
+        )}
+      </ul>
     </div>
   );
 };
 
-export default RunHistory;
+export default RunHistoryPage;

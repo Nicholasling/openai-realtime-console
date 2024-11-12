@@ -1,0 +1,18 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Run {
+  id       Int      @id @default(autoincrement())
+  runName  String
+  time     Int      // Store time in seconds
+  distance Float    // Store distance in kilometers
+  createdAt DateTime @default(now())
+}

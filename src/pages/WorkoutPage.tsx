@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { Map } from '../components/Map'; // Assuming you already have this component
+// import { Map } from '../components/Map'; // Assuming you have this component
 import { Button } from '../components/button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
@@ -55,11 +55,8 @@ const WorkoutPage = () => {
 
   const handleConfirmStop = () => {
     setStopDialogOpen(false); // Close the stop confirmation dialog
-
-    // Format current date and time as "YYYY_MM_DD_HH:MM:SS_name"
-    const now = new Date();
-    const formattedDate = `${now.getFullYear()}_${String(now.getMonth() + 1).padStart(2, '0')}_${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}_name`;
-    setRunName(formattedDate);
+    const defaultRunName = `Run_${new Date().toLocaleString()}`;
+    setRunName(defaultRunName);
     setNameDialogOpen(true); // Open the naming dialog
   };
 
@@ -67,10 +64,34 @@ const WorkoutPage = () => {
     setStopDialogOpen(false); // Close the stop confirmation dialog
   };
 
-  const handleSaveRun = () => {
+  const handleSaveRun = async () => {
     setNameDialogOpen(false); // Close the naming dialog
-    console.log(`Run saved with name: ${runName}`); // Replace with actual save logic if needed
-    navigate('/run-history'); // Navigate to RunHistoryPage
+
+    try {
+      const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          runName,
+          time,
+          distance,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save run');
+      }
+
+      console.log(`Run saved with name: ${runName}`); // Confirm the save
+      navigate('/run-history'); // Navigate to RunHistoryPage
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error:', error.message);
+      } else {
+        console.error('Unknown error:', error);
+      }
+      alert('An error occurred while saving your run.');
+    }
   };
 
   return (

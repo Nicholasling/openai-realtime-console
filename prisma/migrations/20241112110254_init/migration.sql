@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "Run" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "runName" TEXT NOT NULL,
+    "time" INTEGER NOT NULL,
+    "distance" REAL NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
