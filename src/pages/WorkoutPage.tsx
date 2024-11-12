@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-//import { Map } from '../components/Map'; // Assuming you already have this component
+// import { Map } from '../components/Map'; // Assuming you already have this component
 import { Button } from '../components/button/Button';
 import { useNavigate } from 'react-router-dom';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 
 const WorkoutPage = () => {
   const [time, setTime] = useState(0); // Timer for workout
@@ -9,6 +10,11 @@ const WorkoutPage = () => {
   const [isPaused, setIsPaused] = useState(false); // Workout pause/resume
   const [initialCenter, setInitialCenter] = useState<[number, number]>([0, 0]); // Default to [0, 0] initially
   const [hasLocation, setHasLocation] = useState(false); // Track if location is fetched
+  const [isStopDialogOpen, setStopDialogOpen] = useState(false); // Stop confirmation dialog state
+  const [isNameDialogOpen, setNameDialogOpen] = useState(false); // Name dialog state
+  const [runName, setRunName] = useState(""); // Name of the run
+
+  const navigate = useNavigate();
 
   // Get the user's current location when the component mounts
   useEffect(() => {
@@ -36,20 +42,35 @@ const WorkoutPage = () => {
   }, [isPaused]);
 
   const handlePause = () => {
-    setIsPaused(!isPaused); // Toggle pause state
+    setIsPaused(true); // Pause the workout
   };
 
-  // const handleStop = () => {
-  //   setIsPaused(true); // Stop the workout
-  //   // Add logic to save the workout here
-  // };
-
-  const navigate = useNavigate();
+  const handleResume = () => {
+    setIsPaused(false); // Resume the workout
+  };
 
   const handleStop = () => {
-    // Save workout and go to history screen
-    //history.push('/history');
-    navigate('/run-history');
+    setStopDialogOpen(true); // Open the confirmation dialog
+  };
+
+  const handleConfirmStop = () => {
+    setStopDialogOpen(false); // Close the stop confirmation dialog
+
+    // Format current date and time as "YYYY_MM_DD_HH:MM:SS_name"
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}_${String(now.getMonth() + 1).padStart(2, '0')}_${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}_name`;
+    setRunName(formattedDate);
+    setNameDialogOpen(true); // Open the naming dialog
+  };
+
+  const handleCancelStop = () => {
+    setStopDialogOpen(false); // Close the stop confirmation dialog
+  };
+
+  const handleSaveRun = () => {
+    setNameDialogOpen(false); // Close the naming dialog
+    console.log(`Run saved with name: ${runName}`); // Replace with actual save logic if needed
+    navigate('/run-history'); // Navigate to RunHistoryPage
   };
 
   return (
@@ -64,9 +85,54 @@ const WorkoutPage = () => {
         <h3>Workout Progress</h3>
         <p>Time: {time} s</p>
         <p>Distance: {distance.toFixed(2)} km</p>
-        <Button onClick={handlePause} label={isPaused ? 'Resume' : 'Pause'} />
-        <Button onClick={handleStop} label="Stop" />
+        
+        {/* Conditionally render buttons based on `isPaused` state */}
+        {!isPaused ? (
+          <Button onClick={handlePause} label="Pause" />
+        ) : (
+          <div>
+            <Button onClick={handleResume} label="Resume" />
+            <Button onClick={handleStop} label="Stop" />
+          </div>
+        )}
       </div>
+
+      {/* Stop Confirmation Dialog */}
+      <Dialog open={isStopDialogOpen} onClose={handleCancelStop}>
+        <DialogTitle>Confirm Stop</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to stop the workout?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelStop} label="No" />
+          <Button onClick={handleConfirmStop} label="Yes" />
+        </DialogActions>
+      </Dialog>
+
+      {/* Naming Dialog */}
+      <Dialog open={isNameDialogOpen} onClose={() => setNameDialogOpen(false)}>
+        <DialogTitle>Name Your Run</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please provide a name for your run. If left blank, it will default to the current date and time.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Run Name"
+            type="text"
+            fullWidth
+            value={runName}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRunName(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setNameDialogOpen(false)} label="Cancel" />
+          <Button onClick={handleSaveRun} label="Save" />
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
