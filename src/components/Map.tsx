@@ -52,7 +52,7 @@ export function Map({
         scrollWheelZoom={false}
         zoomControl={false}
         attributionControl={false}
-        style={{ height: '300px', width: '100%', maxWidth: '500px' }} // Set custom dimensions for the map
+        style={{ height: '100vh', width: '100%' }} // Set custom dimensions for the map
       >
         <ChangeView center={position} zoom={13} />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

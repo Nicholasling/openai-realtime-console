@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //import { Map } from '../components/Map'; // Assuming you already have this component
 import { Button } from '../components/button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const WorkoutPage = () => {
   const [time, setTime] = useState(0); // Timer for workout
@@ -43,9 +44,12 @@ const WorkoutPage = () => {
   //   // Add logic to save the workout here
   // };
 
+  const navigate = useNavigate();
+
   const handleStop = () => {
     // Save workout and go to history screen
-    history.push('/history');
+    //history.push('/history');
+    navigate('/run-history');
   };
 
   return (

@@ -19,10 +19,9 @@
   }
 }
 
-/* App.scss */
-
+/* Responsive font sizes for time and distance displays */
 .time-display, .distance-display {
-  font-size: 4vw; /* Dynamically sized based on viewport width */
+  font-size: 6vw; /* Larger font size for smaller screens */
 }
 
 @media (min-width: 768px) {
@@ -36,6 +35,8 @@
   display: flex;
   flex-direction: row; /* Horizontal on large screens */
   justify-content: space-around;
+  width: 100%;
+  max-width: 800px; /* Limit width for large screens */
 }
 
 @media (max-width: 768px) {

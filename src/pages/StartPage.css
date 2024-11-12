@@ -1,44 +1,95 @@
+/* Container for the start screen */
 .start-screen-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    padding: 0 20px;
     position: relative;
 }
-
+  
+/* Map container
 .map-container {
     position: relative;
     width: 100%;
     max-width: 500px;
-    height: 500px; /* Adjust as needed */
+    height: 60vh;
+    opacity: 0.6; /* Adjust opacity to make the map more transparent 
+    z-index: 1; /* Ensure the map is below the button overlay 
+}  */
+
+/* Full-screen map background */
+.full-screen-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6; /* Adjust opacity for better contrast with overlay */
+    z-index: 1;
 }
 
+
+@media (min-width: 768px) {
+    .map-container {
+        height: 500px;
+    }
+}
+  
+/* Overlay for button and goal text */
+#mapandbutton{
+    position: relative;
+}
 .button-overlay {
     position: absolute;
-    top: 50%;
+    bottom: 0%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 2; /* Higher z-index to appear above the map */
+    height: 75%; /* Cover three-quarters of the map */
+    justify-content: center; /* Center the content within the overlay */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
+/* Start button styling */
 .start-button {
     background-color: #FF5722;
-    border: none;
     color: white;
-    padding: 15px 30px;
+    border: none;
     border-radius: 50%;
-    font-size: 18px;
+    padding: 15px 30px;
+    font-size: 1.5rem;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    width: 80px;
+    height: 80px;
 }
 
-.goal-button {
-    background: none;
-    border: none;
+@media (min-width: 768px) {
+    .start-button {
+        font-size: 1.8rem;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Goal text styling */
+.goal-text {
     color: #FF5722;
-    font-size: 16px;
+    font-size: 1rem;
     cursor: pointer;
     text-decoration: underline;
+    margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+    .goal-text {
+        font-size: 1.2rem;
+    }
 }
