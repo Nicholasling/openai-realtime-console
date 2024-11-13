@@ -7,7 +7,8 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, T
 const WorkoutPage = () => {
   const [time, setTime] = useState(0); // Timer for workout
   const [distance, setDistance] = useState(0); // Distance covered
-  const [heartrate, setHeartRate] = useState(0); // HeartRate
+  const [heartrate, setHeartRate] = useState(0); // HeartRate  
+  const [heartratezone, setHeartRateZone] = useState("");
   const [isPaused, setIsPaused] = useState(false); // Workout pause/resume
   const [initialCenter, setInitialCenter] = useState<[number, number]>([0, 0]); // Default to [0, 0] initially
   const [hasLocation, setHasLocation] = useState(false); // Track if location is fetched
@@ -16,6 +17,28 @@ const WorkoutPage = () => {
   const [runName, setRunName] = useState(""); // Name of the run
 
   const navigate = useNavigate();
+
+  const heartratezonecalc = () => {
+    const age = 50;
+    const maxHeartRate = 220 - age;
+
+    // Define each zone's range
+    const zones = [
+      { zone: "Zone 1 (Warm-up)", min: Math.round(maxHeartRate * 0.5), max: Math.round(maxHeartRate * 0.6) },
+      { zone: "Zone 2 (Fat Burn)", min: Math.round(maxHeartRate * 0.6), max: Math.round(maxHeartRate * 0.7) },
+      { zone: "Zone 3 (Cardio)", min: Math.round(maxHeartRate * 0.7), max: Math.round(maxHeartRate * 0.8) },
+      { zone: "Zone 4 (Hard)", min: Math.round(maxHeartRate * 0.8), max: Math.round(maxHeartRate * 0.9) },
+      { zone: "Zone 5 (Max Effort)", min: Math.round(maxHeartRate * 0.9), max: maxHeartRate },
+    ];
+
+    const currentZone = zones.find((z) => heartrate >= z.min && heartrate <= z.max);
+    setHeartRateZone(currentZone ? currentZone.zone : "Not in range");
+  };
+
+  // **New effect to re-calculate heart rate zone whenever heartrate changes**
+  useEffect(() => {
+    heartratezonecalc();
+  }, [heartrate]);
 
   // Get the user's current location when the component mounts
   useEffect(() => {
@@ -76,7 +99,8 @@ const WorkoutPage = () => {
           runName,
           time,
           distance,
-          heartrate
+          heartrate,
+          heartratezone
         }),
       });
 
@@ -109,6 +133,8 @@ const WorkoutPage = () => {
         <p>Time: {time} s</p>
         <p>Distance: {distance.toFixed(2)} km</p>
         <p>Heart Rate: {heartrate} BPM</p>
+        <p>{heartratezone}</p>
+
         
         {/* Conditionally render buttons based on `isPaused` state */}
         {!isPaused ? (
