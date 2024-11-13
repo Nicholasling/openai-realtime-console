@@ -5,7 +5,11 @@ import { PrismaClient } from '@prisma/client';
 const app = express();
 const prisma = new PrismaClient();
 
-app.use(cors({ origin: 'https://symmetrical-goldfish-95vr7r4rpp3vjq-3000.app.github.dev' }));
+app.use(cors({
+  origin: 'https://symmetrical-goldfish-95vr7r4rpp3vjq-3000.app.github.dev',
+  methods: 'GET,POST',
+  allowedHeaders: 'Content-Type, Authorization'
+}));
 app.use(express.json());
 
 app.post('/api/runs', async (req, res) => {
