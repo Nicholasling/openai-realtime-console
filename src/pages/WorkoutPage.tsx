@@ -7,7 +7,8 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, T
 const WorkoutPage = () => {
   const [time, setTime] = useState(0); // Timer for workout
   const [distance, setDistance] = useState(0); // Distance covered
-  const [heartrate, setHeartRate] = useState(0); // HeartRate  
+  //const [heartrate, setHeartRate] = useState(0); // HeartRate  
+  const [heartrate, setHeartRate] = useState(Math.floor(Math.random() * (85 - 75 + 1)) + 75);
   const [heartratezone, setHeartRateZone] = useState("");
   const [isPaused, setIsPaused] = useState(false); // Workout pause/resume
   const [initialCenter, setInitialCenter] = useState<[number, number]>([0, 0]); // Default to [0, 0] initially
@@ -25,7 +26,7 @@ const WorkoutPage = () => {
     // Define each zone's range
     const zones = [
       { zone: "Zone 1 (Warm-up)", min: Math.round(maxHeartRate * 0.5), max: Math.round(maxHeartRate * 0.6) },
-      { zone: "Zone 2 (Fat Burn)", min: Math.round(maxHeartRate * 0.6), max: Math.round(maxHeartRate * 0.7) },
+      { zone: "Zone 2 (Endurance)", min: Math.round(maxHeartRate * 0.6), max: Math.round(maxHeartRate * 0.7) },
       { zone: "Zone 3 (Cardio)", min: Math.round(maxHeartRate * 0.7), max: Math.round(maxHeartRate * 0.8) },
       { zone: "Zone 4 (Hard)", min: Math.round(maxHeartRate * 0.8), max: Math.round(maxHeartRate * 0.9) },
       { zone: "Zone 5 (Max Effort)", min: Math.round(maxHeartRate * 0.9), max: maxHeartRate },
@@ -40,28 +41,47 @@ const WorkoutPage = () => {
     heartratezonecalc();
   }, [heartrate]);
 
-  // Get the user's current location when the component mounts
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setInitialCenter([latitude, longitude]); // Set the initial center
-        setHasLocation(true); // Location is successfully retrieved
-      },
-      (error) => {
-        console.error('Error fetching location:', error);
-        setHasLocation(false); // Location could not be retrieved
-      }
-    );
-  }, []);
+  // // Get the user's current location when the component mounts
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       setInitialCenter([latitude, longitude]); // Set the initial center
+  //       setHasLocation(true); // Location is successfully retrieved
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching location:', error);
+  //       setHasLocation(false); // Location could not be retrieved
+  //     }
+  //   );
+  // }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (!isPaused) {
       interval = setInterval(() => {
         setTime((prev) => prev + 1); // Increment time every second
+
+        // **Added distance simulation logic** for approx 5min33s per km
+        // + 0.002 for 8 min pace; +0.0016 for 6 min pace
+        setDistance((prevDistance) => prevDistance + 0.003); // Increment distance by 0.003 km per second (approx 0.18 km per minute)
+      
+        //**Added heart rate logics */
+        setHeartRate((prevHeartRate) => {
+            if (time <= 300) {
+              //warm-up phase
+              return Math.min(prevHeartRate + Math.random() * 1.5, 120); // Warm-up to ~120 BPM 
+            } else if (time <= 1800 ) {
+              // Steady-state running phase
+              return Math.min(Math.max(prevHeartRate + (Math.random() * 2 - 1), 130), 145); // Fluctuate around 130-145 BPM
+            } else {
+              // Cool-down
+              return Math.max(prevHeartRate - Math.random() * 3, 90); // Drop gradually to 90 BPM
+            }
+        });
       }, 1000);
     }
+
     return () => clearInterval(interval);
   }, [isPaused]);
 
@@ -132,7 +152,7 @@ const WorkoutPage = () => {
         <h3>Workout Progress</h3>
         <p>Time: {time} s</p>
         <p>Distance: {distance.toFixed(2)} km</p>
-        <p>Heart Rate: {heartrate} BPM</p>
+        <p>Heart Rate: {heartrate.toFixed(0)} BPM</p>
         <p>{heartratezone}</p>
 
         
