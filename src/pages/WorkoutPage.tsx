@@ -7,6 +7,7 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, T
 const WorkoutPage = () => {
   const [time, setTime] = useState(0); // Timer for workout
   const [distance, setDistance] = useState(0); // Distance covered
+  const [heartrate, setHeartRate] = useState(0); // HeartRate
   const [isPaused, setIsPaused] = useState(false); // Workout pause/resume
   const [initialCenter, setInitialCenter] = useState<[number, number]>([0, 0]); // Default to [0, 0] initially
   const [hasLocation, setHasLocation] = useState(false); // Track if location is fetched
@@ -75,6 +76,7 @@ const WorkoutPage = () => {
           runName,
           time,
           distance,
+          heartrate
         }),
       });
 
@@ -106,6 +108,7 @@ const WorkoutPage = () => {
         <h3>Workout Progress</h3>
         <p>Time: {time} s</p>
         <p>Distance: {distance.toFixed(2)} km</p>
+        <p>Heart Rate: {heartrate} BPM</p>
         
         {/* Conditionally render buttons based on `isPaused` state */}
         {!isPaused ? (
