@@ -1,0 +1,54 @@
+/* Navbar.css */
+
+/* Container styling */
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 60px;
+    background-color: #ffffff;
+    max-width: 1120px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo styling */
+  .navbar-logo img {
+    height: 40px;
+  }
+  
+  /* Navigation Links */
+  .navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+  
+  .navbar-links li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-links li a:hover {
+    color: #5C6B7E; /* A subtle hover color */
+  }
+  
+  /* CTA Button */
+  .navbar-cta {
+    padding: 8px 16px;
+    background-color: #FF5722;
+
+    color: #ffffff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar-cta:hover {
+    background-color: #3C4B5E; /* Darker color on hover */
+  }
+  

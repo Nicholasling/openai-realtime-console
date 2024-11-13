@@ -39,7 +39,8 @@ const StartScreen = () => {
                             <button className="start-button" onClick={handleStart}>
                                 Start
                             </button>
-                            <div className="goal-text">Set a goal</div>
+                            <div className="goal">Set a goal</div>
+                            <div className="voice">Voice</div>
                         </div>
                     
                 </>

@@ -3,9 +3,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    padding: 0 20px;
-    position: relative;
+    height: 100vh; /* Full viewport height to center the content vertically */
+    padding: 0 20px; /* Side padding for spacing */
+    position: relative; /* Enables absolute positioning for children within this container */
 }
   
 /* Map container
@@ -27,6 +27,8 @@
     height: 100%;
     opacity: 0.6; /* Adjust opacity for better contrast with overlay */
     z-index: 1;
+    /* transform: translateY(-10%); Moves the map 10% higher */
+
 }
 
 
@@ -63,12 +65,15 @@
     color: white;
     border: none;
     border-radius: 50%;
-    padding: 15px 30px;
+    padding: 30px 30px;
     font-size: 1.5rem;
     cursor: pointer;
     margin-bottom: 5px;
     width: 80px;
     height: 80px;
+    display: flex; /* Added for centering */
+    align-items: center; /* Centers text vertically */
+    justify-content: center; /* Centers text horizontally */
 }
 
 @media (min-width: 768px) {
@@ -80,16 +85,39 @@
 }
 
 /* Goal text styling */
-.goal-text {
+.goal {
     color: #FF5722;
     font-size: 1rem;
     cursor: pointer;
     text-decoration: underline;
     margin-top: 8px;
+    background-color: #e0e0e0; /* Light grey background */
+    padding: 8px 16px; /* Padding around the text */
+    border-radius: 10px; /* Optional rounded corners */
+    text-align: center; /* Center text alignment */
 }
 
 @media (min-width: 768px) {
-    .goal-text {
+    .goal {
+        font-size: 1.2rem;
+    }
+}
+
+/* Voice styling */
+.voice {
+    color: #FF5722;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 8px;
+    background-color: #e0e0e0; /* Light grey background */
+    padding: 8px 16px; /* Padding around the text */
+    border-radius: 10px; /* Optional rounded corners */
+    text-align: center; /* Center text alignment */
+}
+
+@media (min-width: 768px) {
+    .voice {
         font-size: 1.2rem;
     }
 }

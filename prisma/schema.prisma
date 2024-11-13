@@ -14,6 +14,7 @@ model Run {
   runName       String
   time          Int     // Store time in seconds
   distance      Float   // Store distance in kilometers
+  pace          String   @default("") // Store pace in time per km
   heartrate     Int     @default(60) // Store heartrate in bpm
   heartratezone String  @default("Zone 1")// Store heartrate zone 1,2,3,4,5
   createdAt DateTime @default(now())

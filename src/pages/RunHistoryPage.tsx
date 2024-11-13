@@ -5,6 +5,7 @@ type Run = {
   runName: string;
   time: number;
   distance: number;
+  pace: string;
   heartrate: number;
   heartratezone: string;
 };
@@ -48,7 +49,7 @@ const RunHistoryPage = () => {
         {runs.length > 0 ? (
           runs.map((run) => (
             <li key={run.id}>
-              <strong>{run.runName}</strong> - Time: {run.time} seconds, Distance: {run.distance.toFixed(2)} km, Heart Rate: {run.heartrate} BPM, Heart Rate Zone: {run.heartratezone}
+              <strong>{run.runName}</strong> - Time: {run.time} seconds, Distance: {run.distance.toFixed(2)} km, Pace: {run.pace} per km, Heart Rate: {run.heartrate} BPM, Heart Rate Zone: {run.heartratezone}
             </li>
           ))
         ) : (

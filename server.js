@@ -19,10 +19,10 @@ app.options('/api/runs', cors());
 
 // POST endpoint to create a new run
 app.post('/api/runs', async (req, res) => {
-  const { runName, time, distance, heartrate, heartratezone } = req.body; // Include 'heartrate' from request body
+  const { runName, time, distance, pace, heartrate, heartratezone } = req.body; // Include 'heartrate' from request body
   try {
     const run = await prisma.run.create({
-      data: { runName, time, distance, heartrate, heartratezone },
+      data: { runName, time, distance, pace, heartrate, heartratezone },
     });
     res.json(run);
   } catch (error) {

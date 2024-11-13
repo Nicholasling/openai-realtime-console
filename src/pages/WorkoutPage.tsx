@@ -7,6 +7,7 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, T
 const WorkoutPage = () => {
   const [time, setTime] = useState(0); // Timer for workout
   const [distance, setDistance] = useState(0); // Distance covered
+  const [pace, setPace] = useState("");
   //const [heartrate, setHeartRate] = useState(0); // HeartRate  
   const [heartrate, setHeartRate] = useState(Math.floor(Math.random() * (85 - 75 + 1)) + 75);
   const [heartratezone, setHeartRateZone] = useState("");
@@ -61,29 +62,38 @@ const WorkoutPage = () => {
     if (!isPaused) {
       interval = setInterval(() => {
         setTime((prev) => prev + 1); // Increment time every second
-
-        // **Added distance simulation logic** for approx 5min33s per km
-        // + 0.002 for 8 min pace; +0.0016 for 6 min pace
-        setDistance((prevDistance) => prevDistance + 0.003); // Increment distance by 0.003 km per second (approx 0.18 km per minute)
-      
-        //**Added heart rate logics */
+  
+        setDistance((prevDistance) => {
+          const newDistance = prevDistance + 0.003; // Increment distance
+          // Update pace based on new distance and time
+          if (newDistance > 0) {
+            const paceInMinutes = (time / newDistance) / 60; // Calculate pace in minutes per km
+            const minutes = Math.floor(paceInMinutes);
+            const seconds = Math.round((paceInMinutes - minutes) * 60);
+  
+            // Ensure seconds are displayed as two digits
+            const formattedSeconds = seconds === 60 ? '00' : seconds < 10 ? `0${seconds}` : seconds;
+            setPace(`${minutes}'${formattedSeconds}''`);
+          }
+          return newDistance;
+        });
+  
+        //**Added heart rate logic**
         setHeartRate((prevHeartRate) => {
-            if (time <= 300) {
-              //warm-up phase
-              return Math.min(prevHeartRate + Math.random() * 1.5, 120); // Warm-up to ~120 BPM 
-            } else if (time <= 1800 ) {
-              // Steady-state running phase
-              return Math.min(Math.max(prevHeartRate + (Math.random() * 2 - 1), 130), 145); // Fluctuate around 130-145 BPM
-            } else {
-              // Cool-down
-              return Math.max(prevHeartRate - Math.random() * 3, 90); // Drop gradually to 90 BPM
-            }
+          if (time <= 300) {
+            return Math.min(prevHeartRate + Math.random() * 1.5, 120); // Warm-up to ~120 BPM
+          } else if (time <= 1800) {
+            return Math.min(Math.max(prevHeartRate + (Math.random() * 2 - 1), 130), 145); // Fluctuate around 130-145 BPM
+          } else {
+            return Math.max(prevHeartRate - Math.random() * 3, 90); // Cool-down phase
+          }
         });
       }, 1000);
     }
-
+  
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, distance, time]); // Add `distance` and `time` as dependencies
+  
 
   const handlePause = () => {
     setIsPaused(true); // Pause the workout
@@ -119,6 +129,7 @@ const WorkoutPage = () => {
           runName,
           time,
           distance,
+          pace,
           heartrate,
           heartratezone
         }),
@@ -150,8 +161,9 @@ const WorkoutPage = () => {
       )} */}
       <div>
         <h3>Workout Progress</h3>
-        <p>Time: {time} s</p>
-        <p>Distance: {distance.toFixed(2)} km</p>
+        <p>Time:      {time} s</p>
+        <p>Distance:  {distance.toFixed(2)} km</p>
+        <p>Pace:      {pace} per km </p>
         <p>Heart Rate: {heartrate.toFixed(0)} BPM</p>
         <p>{heartratezone}</p>
 
