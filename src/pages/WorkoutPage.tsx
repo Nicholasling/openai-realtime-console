@@ -5,6 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import './WorkoutPage.css';
 
+// import dotenv from 'dotenv';
+
+// const dotenv = require('dotenv');
+// dotenv.config();
+// console.log(process.env.API_CALL_URL)
+
+
+const API_CALL_URL: string =
+  process.env.API_CALL_URL|| '';
+
 const WorkoutPage = () => {
   const [time, setTime] = useState(0); // Timer for workout
   const [distance, setDistance] = useState(0); // Distance covered
@@ -123,7 +133,9 @@ const WorkoutPage = () => {
     setNameDialogOpen(false); // Close the naming dialog
 
     try {
-      const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs', {
+      const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs'
+, {
+      // const response = await fetch(API_CALL_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -169,15 +181,17 @@ const WorkoutPage = () => {
         <p>{heartratezone}</p>
 
         
-        {/* Conditionally render buttons based on `isPaused` state */}
-        {!isPaused ? (
-          <Button onClick={handlePause} label="Pause" />
-        ) : (
-          <div>
-            <Button onClick={handleResume} label="Resume" />
-            <Button onClick={handleStop} label="Stop" />
-          </div>
-        )}
+        <div className="button-overlay">
+          {/* Conditionally render buttons based on `isPaused` state */}
+          {!isPaused ? (
+            <Button onClick={handlePause} label="Pause" className="pause-button"/>
+          ) : (
+            <div>
+              <Button onClick={handleResume} label="Resume" className="resume-button"/>
+              <Button onClick={handleStop} label="Stop" className="stop-button"/>
+            </div>
+          )}
+        </div>  
       </div>
 
       {/* Stop Confirmation Dialog */}

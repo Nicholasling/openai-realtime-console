@@ -43,7 +43,7 @@
     position: relative;
 }
 .button-overlay {
-    /* position: absolute; */
+    position: absolute;
     position: fixed;
     bottom: 0;
     left: 50%;
