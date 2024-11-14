@@ -31,6 +31,19 @@ const WorkoutPage = () => {
 
   const navigate = useNavigate();
 
+  const formatTime = (totalSeconds: number) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+  
+    // Pad hours, minutes, and seconds with leading zeros
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+  
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  };
+
   const heartratezonecalc = () => {
     const age = 50;
     const maxHeartRate = 220 - age;
@@ -133,16 +146,17 @@ const WorkoutPage = () => {
     setNameDialogOpen(false); // Close the naming dialog
 
     try {
-      // const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs'
+      const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs'
 
-      const response = await fetch('https://openai-realtime-console-zxx5.onrender.com/api/runs'
+      //const response = await fetch('https://openai-realtime-console-zxx5.onrender.com/api/runs'
       , {
       // const response = await fetch(API_CALL_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           runName,
-          time,
+          // time,
+          time: formatTime(time), // Save formatted time
           distance,
           pace,
           heartrate,
@@ -174,15 +188,59 @@ const WorkoutPage = () => {
       ) : (
         <p>Fetching your location...</p> // Display a message while fetching location
       )} */}
-      <div>
-        <h3>Workout Progress</h3>
-        <p>Time:      {time} s</p>
+        <div>
+          <h3>Workout Progress</h3>
+          {/* Using .stats class here */}
+        <div className="stats">
+            <div>
+              <p className="stats-bold">{formatTime(time)}</p>
+              <p>Time</p>
+            </div>
+            <div>
+            <p className="stats-bold">{distance.toFixed(2)}</p>
+              <p>Distance(km)</p>
+            </div>
+            <div>
+            <p className="stats-bold">{pace}</p>
+              <p>Pace (per km)</p>
+            </div>
+        </div>
+        {/* <p>Time:      {time} s</p>
         <p>Distance:  {distance.toFixed(2)} km</p>
-        <p>Pace:      {pace} per km </p>
-        <p>Heart Rate: {heartrate.toFixed(0)} BPM</p>
-        <p>{heartratezone}</p>
+        <p>Pace:      {pace} per km </p> */}
 
-        
+        {/* <div>
+          <p className="heartrate">{heartrate.toFixed(0)}</p>
+          <p className="heartrate-unit">
+            Heart Rate (BPM)
+            <span className="heart-icon">❤️</span>
+          </p>
+          <p>{heartratezone}</p>
+        </div> */}
+
+        <div>
+          <p className="heartrate">{heartrate.toFixed(0)}</p>
+          <p className="heartrate-unit">
+            Heart Rate (BPM)
+            <span className="heart-icon">❤️</span>
+          </p>
+          <div className="heart-rate-zones">
+            {["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"].map((zone, index) => (
+              <div
+                key={zone}
+                className={`zone zone-${index + 1} ${heartratezone.includes(zone) ? "active" : ""}`}
+              >
+                {heartratezone.includes(zone) && (
+                  <>
+                    <span>{`❤ ${heartratezone}`}</span>
+                    <div className="triangle"></div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="button-overlay">
           {/* Conditionally render buttons based on `isPaused` state */}
           {!isPaused ? (

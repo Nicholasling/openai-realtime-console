@@ -12,7 +12,7 @@ datasource db {
 model Run {
   id            Int     @id @default(autoincrement())
   runName       String
-  time          Int     // Store time in seconds
+  time          String     // Store time in seconds, Int
   distance      Float   // Store distance in kilometers
   pace          String   @default("") // Store pace in time per km
   heartrate     Int     @default(60) // Store heartrate in bpm

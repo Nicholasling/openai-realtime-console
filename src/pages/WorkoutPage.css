@@ -1,24 +1,68 @@
 /* Basic styles for WorkoutPage */
 body {
+    background-color: #f7997c; /* White background */
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    color: #222;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-  }
-  
-  .WorkoutPage {
-    max-width: 500px;
-    margin: 20px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+    justify-content: space-between;
+    height: 100vh;
+}
+
+h3 {
+  font-size: 1.5em;
+  color: #222;
+  margin: 20px 0 10px;
+  text-align: center;
+}
+/* Workout statistics like time, distance, pace styles */
+.stats, .heartrate-unit{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  font-size: 1.2em;
+  color: #222;
+  text-align: center;
+}
+.stats-bold {
+  font-weight: bold;
+  font-size: 2.2em;
+  color: black;
+  margin-bottom: 0.2em; /* Adjust the spacing between the bold text and label */
+}
+.stats p {
+  margin: 0;
+  line-height: 1.2; /* Adjust line-height to reduce spacing */
+}
+
+.heartrate {
+  font-size: 6rem;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  margin-bottom: 0.2em; /* Adjust the spacing between the bold text and label */
+}
+
+.heartrate-unit {
+  font-size: 1.5rem;
+  color: #222;
+  text-align: center;
+  margin: 0;
+  line-height: 1.2; /* Adjust line-height to reduce spacing */
+  display: inline-flex;
+  align-items: center; /* Ensures alignment of the heart icon */
+  justify-content: center;
+}
+
+.heart-icon {
+  color: #ff0000; /* Red color */
+  margin-left: 0;
+  font-size: 1.5rem;
+}
+
   .WorkoutPage h3 {
     text-align: center;
     color: #333333;
@@ -122,3 +166,53 @@ body {
     outline: none;
   }
   
+
+/* Heart Rate Zone Bar */
+.heart-rate-zones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.zone {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+
+/* Zone colors */
+.zone-1 { background-color: #002f4f; }
+.zone-2 { background-color: #295c5c; }
+.zone-3 { background-color: #d4ff3f; }
+.zone-4 { background-color: #7a4a00; }
+.zone-5 { background-color: #5c1a1a; }
+
+
+/* Highlight active zone with triangle pointer */
+.active {
+  color: #000;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.triangle {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #d4ff3f;
+}
