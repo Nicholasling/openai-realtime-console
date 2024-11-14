@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../components/button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
+import './WorkoutPage.css';
 
 const WorkoutPage = () => {
   const [time, setTime] = useState(0); // Timer for workout

@@ -43,15 +43,17 @@
     position: relative;
 }
 .button-overlay {
-    position: absolute;
-    bottom: 0%;
+    /* position: absolute; */
+    position: fixed;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 2; /* Higher z-index to appear above the map */
-    height: 75%; /* Cover three-quarters of the map */
+    width: 100%; /* CHANGED: Full width to span the screen */
+    /* height: 75%; Cover three-quarters of the map */
     justify-content: center; /* Center the content within the overlay */
     padding-top: 10px;
     padding-bottom: 10px;
@@ -69,8 +71,8 @@
     font-size: 1.5rem;
     cursor: pointer;
     margin-bottom: 5px;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     display: flex; /* Added for centering */
     align-items: center; /* Centers text vertically */
     justify-content: center; /* Centers text horizontally */
@@ -83,41 +85,23 @@
         height: 100px;
     }
 }
-
-/* Goal text styling */
-.goal {
-    color: #FF5722;
-    font-size: 1rem;
+/* Goal and Voice styling */
+.goal, .voice {
+    background-color: #b0b0b0; /* Darker grey background */
+    color: #FF5722; /* Orange font color */
+    font-size: 1.2rem;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none; /* No underline */
     margin-top: 8px;
-    background-color: #e0e0e0; /* Light grey background */
-    padding: 8px 16px; /* Padding around the text */
-    border-radius: 10px; /* Optional rounded corners */
-    text-align: center; /* Center text alignment */
+    padding: 8px 16px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%; /* Full width across screen */
+    box-sizing: border-box; /* Ensures padding does not affect total width */
 }
 
 @media (min-width: 768px) {
-    .goal {
-        font-size: 1.2rem;
-    }
-}
-
-/* Voice styling */
-.voice {
-    color: #FF5722;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: underline;
-    margin-top: 8px;
-    background-color: #e0e0e0; /* Light grey background */
-    padding: 8px 16px; /* Padding around the text */
-    border-radius: 10px; /* Optional rounded corners */
-    text-align: center; /* Center text alignment */
-}
-
-@media (min-width: 768px) {
-    .voice {
-        font-size: 1.2rem;
+    .goal, .voice {
+        font-size: 1.5rem;
     }
 }

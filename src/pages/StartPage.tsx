@@ -37,7 +37,7 @@ const StartScreen = () => {
                         </div>
                         <div className="button-overlay">
                             <button className="start-button" onClick={handleStart}>
-                                Start
+                                Start run
                             </button>
                             <div className="goal">Set a goal</div>
                             <div className="voice">Voice</div>
