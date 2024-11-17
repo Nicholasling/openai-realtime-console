@@ -7,6 +7,7 @@ const StartScreen = () => {
     const navigate = useNavigate();
     const [initialCenter, setInitialCenter] = useState<[number, number]>([0, 0]);
     const [hasLocation, setHasLocation] = useState(false);
+    const [showOnboarding, setShowOnboarding] = useState(true); // State to control the onboarding card
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -22,12 +23,37 @@ const StartScreen = () => {
         );
     }, []);
 
+    const handleDismissOnboarding = () => {
+        setShowOnboarding(false); // Dismiss the onboarding card
+    };
+
     const handleStart = () => {
         navigate('/workout');
     };
 
     return (
         <div className="start-screen-container">
+            {showOnboarding && (
+                <div className="onboarding-overlay">
+                <div className="onboarding-card">
+                  <img 
+                    src="/onboard_run.svg" 
+                    alt="Fitness Tracker Illustration" 
+                    className="onboarding-image"
+                  />
+                  <h2>Train Smarter, Not Harder!</h2>
+                  <ul className="onboarding-list">
+                    <li>Run efficiently, build endurance.</li>
+                    <li>Train safely and avoid overtraining.</li>
+                    <li>Enjoy every step.</li>
+                  </ul>
+                  <button className="onboarding-button" onClick={handleDismissOnboarding}>
+                    I’m Ready to Run!
+                  </button>
+                </div>
+              </div>
+              
+            )}
             {hasLocation ? (
                 <>
                     {/* Apply the full-screen map styling to the wrapper div */}
