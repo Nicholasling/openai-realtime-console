@@ -45,12 +45,12 @@ const WorkoutPage = () => {
   };
 
   const heartratezonecalc = () => {
-    const age = 50;
+    const age = 60;
     const maxHeartRate = 220 - age;
 
     // Define each zone's range
     const zones = [
-      { zone: "Zone 1 (Warm-up)", min: Math.round(maxHeartRate * 0.5), max: Math.round(maxHeartRate * 0.6) },
+      { zone: "Zone 1 (Warm-up)", min: Math.round(maxHeartRate * 0.4), max: Math.round(maxHeartRate * 0.6) },
       { zone: "Zone 2 (Endurance)", min: Math.round(maxHeartRate * 0.6), max: Math.round(maxHeartRate * 0.7) },
       { zone: "Zone 3 (Cardio)", min: Math.round(maxHeartRate * 0.7), max: Math.round(maxHeartRate * 0.8) },
       { zone: "Zone 4 (Hard)", min: Math.round(maxHeartRate * 0.8), max: Math.round(maxHeartRate * 0.9) },
@@ -91,7 +91,7 @@ const WorkoutPage = () => {
           const newDistance = prevDistance + 0.003; // Increment distance
           // Update pace based on new distance and time
           if (newDistance > 0) {
-            const paceInMinutes = (time / newDistance) / 60; // Calculate pace in minutes per km
+            const paceInMinutes = time / (newDistance * 60); // Calculate pace in minutes per km
             const minutes = Math.floor(paceInMinutes);
             const seconds = Math.round((paceInMinutes - minutes) * 60);
   
@@ -102,22 +102,33 @@ const WorkoutPage = () => {
           return newDistance;
         });
   
-        //**Added heart rate logic**
+        // **Updated heart rate logic**
         setHeartRate((prevHeartRate) => {
+          const fluctuation = Math.random() * 10 - 5; // Generate a fluctuation value between -5 and +5
+          let newHeartRate = prevHeartRate + fluctuation;
+  
           if (time <= 300) {
-            return Math.min(prevHeartRate + Math.random() * 1.5, 120); // Warm-up to ~120 BPM
+            // Warm-up phase, target ~120 BPM
+            newHeartRate = Math.min(newHeartRate, 120);
           } else if (time <= 1800) {
-            return Math.min(Math.max(prevHeartRate + (Math.random() * 2 - 1), 130), 145); // Fluctuate around 130-145 BPM
+            // Main workout phase, target range 130-145 BPM
+            if (newHeartRate > 145) {
+              newHeartRate = 145 - Math.random() * 5; // Adjust down if exceeds 145
+            } else if (newHeartRate < 130) {
+              newHeartRate = 130 + Math.random() * 5; // Adjust up if below 130
+            }
           } else {
-            return Math.max(prevHeartRate - Math.random() * 3, 90); // Cool-down phase
+            // Cool-down phase, target range decreasing toward ~90 BPM
+            newHeartRate = Math.max(newHeartRate, 90);
           }
+  
+          return newHeartRate;
         });
       }, 1000);
     }
   
-    return () => clearInterval(interval);
-  }, [isPaused, distance, time]); // Add `distance` and `time` as dependencies
-  
+    return () => clearInterval(interval); // Cleanup interval on component unmount or pause
+  }, [isPaused, time]);  
 
   const handlePause = () => {
     setIsPaused(true); // Pause the workout

@@ -1,15 +1,32 @@
-/* Basic styles for WorkoutPage */
 body {
-    background-color: #f7997c; /* White background */
-    font-family: Arial, sans-serif;
-    color: #222;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100vh;
+  /* background-color: #f7997c; Keeps the background color */
+  font-family: Arial, sans-serif; /* Font settings */
+  color: #222; /* Text color */
+  margin: 0; /* Removes any browser default margins */
+  padding: 0; /* Resets padding */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box; /* Ensures padding is included in dimensions */
+}
+
+/* Stats section padding and alignment */
+.stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%; /* Ensures it spans the width of the screen */
+  margin-bottom: 20px; /* Adds spacing below stats */
+  padding: 10px; /* Padding inside the stats section */
+  background-color: #fff; /* Optional: make it stand out */
+  border-radius: 10px; /* Optional: rounded corners */
+}
+
+/* Heart rate display styles */
+.heart-rate {
+  font-size: 48px;
+  margin: 20px 0; /* Adds spacing above and below */
 }
 
 h3 {
@@ -177,7 +194,7 @@ h3 {
 }
 
 .zone {
-  width: 50px;
+  width: 80px;
   height: 50px;
   border-radius: 8px;
   display: flex;
@@ -188,14 +205,19 @@ h3 {
   font-family: Arial, sans-serif;
 }
 
+/* Zone colors
+.zone-1 { background-color: #89CFF0; }
+.zone-2 { background-color: #32CD32; }
+.zone-3 { background-color: #FFA500; }
+.zone-4 { background-color: #FF007F; }
+.zone-5 { background-color: #FF0000; } */
 
 /* Zone colors */
-.zone-1 { background-color: #002f4f; }
-.zone-2 { background-color: #295c5c; }
-.zone-3 { background-color: #d4ff3f; }
-.zone-4 { background-color: #7a4a00; }
-.zone-5 { background-color: #5c1a1a; }
-
+.zone-1 { background-color: #87CEEB; }
+.zone-2 { background-color: #98FF98; }
+.zone-3 { background-color: #FFEB3B; }
+.zone-4 { background-color: #FF7F50; }
+.zone-5 { background-color: #E60000; }
 
 /* Highlight active zone with triangle pointer */
 .active {

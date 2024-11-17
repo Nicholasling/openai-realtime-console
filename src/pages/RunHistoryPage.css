@@ -1,0 +1,82 @@
+/* General page styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* Container for the run history page */
+.run-history-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+/* Styles for the list of runs */
+.run-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Styles for individual run cards */
+.run-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 12px;
+    padding: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.run-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Run name styling */
+.run-card-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ff5722;
+    /* margin-bottom: 8px; */
+    margin: 0; /* Remove bottom margin */
+}
+
+/* Run details styling */
+.run-card-details {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+    margin: 0; /* Remove default margins */
+}
+/* Highlight key metrics */
+.run-card-details span.metric-key {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.run-card-details span.metric-value {
+    font-size: 16px;
+    color: #000;
+}
+/* Heart Rate Zone badge */
+.heart-rate-zone-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background-color: #ff5722; /* Use different colors for each zone */
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 8px;
+}
