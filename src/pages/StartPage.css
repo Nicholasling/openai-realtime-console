@@ -135,7 +135,7 @@
 /* Onboarding SVG image */
 .onboarding-image {
     width: 100%; /* Fully responsive */
-    max-width: 200px; /* Constrain size */
+    max-width: 500px; /* Constrain size */
     margin-bottom: 20px; /* Space between image and title */
 }
 
