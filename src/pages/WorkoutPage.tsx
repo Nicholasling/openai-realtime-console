@@ -253,16 +253,15 @@ const WorkoutPage = () => {
         </div>
 
         <div className="button-overlay">
-          {/* Conditionally render buttons based on `isPaused` state */}
           {!isPaused ? (
-            <Button onClick={handlePause} label="Pause" className="pause-button"/>
+            <Button onClick={handlePause} label="Pause" className="pause-button" />
           ) : (
-            <div>
-              <Button onClick={handleResume} label="Resume" className="resume-button"/>
-              <Button onClick={handleStop} label="Stop" className="stop-button"/>
+            <div className="resume-stop-container">
+              <Button onClick={handleResume} label="Resume" className="resume-button" />
+              <Button onClick={handleStop} label="Stop" className="stop-button" />
             </div>
           )}
-        </div>  
+        </div>
       </div>
 
       {/* Stop Confirmation Dialog */}

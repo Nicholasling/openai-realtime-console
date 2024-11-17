@@ -111,28 +111,30 @@ h3 {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 } 
-/* Pause button styling */
-.pause-button, .resume-button, .stop-button {
-    background-color: #b0b0b0; /* Darker grey background */
-    color: #FF5722; /* Orange font color */
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-decoration: none; /* No underline */
-    margin-top: 8px;
-    padding: 8px 16px;
-    border-radius: 10px;
-    text-align: center;
-    width: 80%; /* Full width across screen */
-    box-sizing: border-box; /* Ensures padding does not affect total width */
-    display: flex; /* Added to center content */
-    align-items: center; /* Vertically centers content */
-    justify-content: center; /* Horizontally centers content */
+/* Pause, Resume, and Stop buttons styling */
+/* .pause-button, .resume-button, .stop-button { */
+.pause-button {
+  background-color: #b0b0b0; /* Darker grey background */
+  color: #FF5722; /* Orange font color */
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-decoration: none; /* No underline */
+  margin-top: 8px;
+  padding: 12px 16px; /* Ensures sufficient vertical padding */
+  border-radius: 10px;
+  text-align: center;
+  width: 80%; /* Ensures all buttons have the same width */
+  box-sizing: border-box; /* Ensures padding does not affect total width */
+  display: flex; /* Centers content within the button */
+  align-items: center; /* Vertically centers content */
+  justify-content: center; /* Horizontally centers content */
 }
 
 @media (min-width: 768px) {
-    .pause-button, .resume-button, .stop-button  {
-        font-size: 1.5rem;
-    }
+  .pause-button, .resume-button, .stop-button {
+      font-size: 1.5rem; /* Larger text for bigger screens */
+      padding: 14px 20px; /* Slightly increased padding for better visibility */
+  }
 }
 
   .Button {
@@ -154,6 +156,43 @@ h3 {
     background-color: #0056b3;
   } */
   
+  .resume-stop-container {
+    display: flex; /* Use flexbox for horizontal layout */
+    justify-content: center; /* Center the buttons */
+    align-items: center; /* Align vertically */
+    gap: 10px; /* Add spacing between buttons */
+    padding: 0 20px; /* Add space on the left and right */
+    width: 100%; /* Ensure the container spans the full width */
+    box-sizing: border-box; /* Include padding in the container width */
+
+  }
+
+.resume-button {
+    flex-grow: 2; /* Make the Resume button take more space */
+    background-color: #b0b0b0;
+    color: #FF5722;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    justify-content: center; /* Horizontally center content */
+}
+
+.stop-button {
+    flex-grow: 1; /* Make the Stop button take less space */
+    background-color: #b0b0b0;
+    color: #FF5722;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    justify-content: center; /* Horizontally center content */
+}
+
   .Dialog {
     padding: 20px;
   }
