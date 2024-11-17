@@ -6,9 +6,9 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.use(cors({
-  origin: 'https://symmetrical-goldfish-95vr7r4rpp3vjq-3000.app.github.dev',
+  // origin: 'https://symmetrical-goldfish-95vr7r4rpp3vjq-3000.app.github.dev',
   //origin: 'https://openai-realtime-console-frontend.onrender.com',
-  //origin: 'https://runbuddy.run',
+  origin: 'https://runbuddy.run',
   methods: ['GET', 'POST', 'OPTIONS'], // Include 'OPTIONS' for preflight requests
   allowedHeaders: ['Content-Type', 'Authorization'],
   // credentials: true // Allow credentials if required
