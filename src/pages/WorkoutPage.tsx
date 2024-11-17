@@ -158,8 +158,8 @@ const WorkoutPage = () => {
 
     try {
       //const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs'
-
-      const response = await fetch('https://openai-realtime-console-zxx5.onrender.com/api/runs'
+      const response = await fetch('https://glorious-space-guacamole-75q6v64xgqhwrqx-3001.app.github.dev/api/runs'
+      //const response = await fetch('https://openai-realtime-console-zxx5.onrender.com/api/runs'
       , {
       // const response = await fetch(API_CALL_URL, {
         method: 'POST',
