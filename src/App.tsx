@@ -24,9 +24,8 @@ function App() {
       {!hideNavbarPaths.includes(location.pathname) && <Navbar />}
 
       <Routes>
-        {/* <Route path="/" element={<ConsolePage />} /> Home page */}
-        <Route path="/" element={<AboutPage />} /> {/* Home page */}
-
+        <Route path="/console" element={<ConsolePage />} /> {/* Home page */}
+        <Route path="/" element={<AboutPage />} /> {/* About page */}
         <Route path="/about" element={<AboutPage />} /> {/* About page */}
         <Route path="/start" element={<StartPage />} /> {/* Start page */}
         <Route path="/workout" element={<WorkoutPage />} /> {/* Workout page */}

@@ -54,19 +54,21 @@ interface RealtimeEvent {
   event: { [key: string]: any };
 }
 
-// export function ConsolePage() {
-//   /**
-//    * Ask user for API Key
-//    * If we're using the local relay server, we don't need this
-//    */
-//   const apiKey = LOCAL_RELAY_SERVER_URL
-//     ? ''
-//     : localStorage.getItem('tmp::voice_api_key') ||
-//       prompt('OpenAI API Key') ||
-//       '';
-//   if (apiKey !== '') {
-//     localStorage.setItem('tmp::voice_api_key', apiKey);
-//   }
+export function ConsolePage() {
+  /**
+   * Ask user for API Key
+   * If we're using the local relay server, we don't need this
+   */
+  const apiKey = LOCAL_RELAY_SERVER_URL
+    ? ''
+    // : localStorage.getItem('tmp::voice_api_key') ||
+    //   prompt('OpenAI API Key') ||
+    //   '';
+    : localStorage.getItem('tmp::voice_api_key') || process.env.REACT_APP_OPENAI_API_KEY || '';
+
+  if (apiKey !== '') {
+    localStorage.setItem('tmp::voice_api_key', apiKey);
+  }
 
   /**
    * Instantiate:
