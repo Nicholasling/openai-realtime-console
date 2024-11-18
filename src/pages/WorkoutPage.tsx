@@ -104,7 +104,7 @@ const WorkoutPage = () => {
   
         // **Updated heart rate logic**
         setHeartRate((prevHeartRate) => {
-          const fluctuation = Math.random() * 10 - 5; // Generate a fluctuation value between -5 and +5
+          const fluctuation = Math.random() * 10 - 3; // Generate a fluctuation value between -5 and +5
           let newHeartRate = prevHeartRate + fluctuation;
   
           if (time <= 300) {
