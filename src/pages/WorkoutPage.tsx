@@ -104,7 +104,7 @@ const WorkoutPage = () => {
   
         // **Updated heart rate logic**
         setHeartRate((prevHeartRate) => {
-          const fluctuation = Math.random() * 10 - 5; // Generate a fluctuation value between -5 and +5
+          const fluctuation = Math.random() * 10 - 3; // Generate a fluctuation value between -5 and +5
           let newHeartRate = prevHeartRate + fluctuation;
   
           if (time <= 300) {
@@ -158,8 +158,8 @@ const WorkoutPage = () => {
 
     try {
       //const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs'
-      const response = await fetch('https://glorious-space-guacamole-75q6v64xgqhwrqx-3001.app.github.dev/api/runs'
-      //const response = await fetch('https://openai-realtime-console-zxx5.onrender.com/api/runs'
+
+      const response = await fetch('https://openai-realtime-console-zxx5.onrender.com/api/runs'
       , {
       // const response = await fetch(API_CALL_URL, {
         method: 'POST',

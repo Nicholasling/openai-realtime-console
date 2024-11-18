@@ -6,7 +6,7 @@
    viewBox="0 0 1050 750.87"
    version="1.1"
    id="svg41"
-   sodipodi:docname="undraw_fitness_tracker_3033 (1)_edit.svg"
+   sodipodi:docname="onboard_run.svg"
    inkscape:version="1.3.2 (091e20e, 2023-11-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -27,7 +27,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="0.82106903"
-     inkscape:cx="522.48956"
+     inkscape:cx="523.09853"
      inkscape:cy="362.33251"
      inkscape:window-width="1512"
      inkscape:window-height="916"
@@ -364,7 +364,23 @@
      inkscape:rounded="0"
      inkscape:randomized="0"
      d="m 771.04351,160.42924 -17.29837,-10.92411 19.12307,-9.96583 18.10974,-9.51877 -0.93087,21.54398 -0.81137,20.44288 z"
-     inkscape:transform-center-x="-1.4966428"
-     inkscape:transform-center-y="0.65746939"
-     transform="matrix(-0.77102267,0,0,-0.73893457,993.85391,528.57515)" />
+     inkscape:transform-center-x="-1.8776561"
+     inkscape:transform-center-y="0.83813117"
+     transform="matrix(-0.96728896,0,0,-0.94198546,1161.7887,560.97593)" />
+  <text
+     xml:space="preserve"
+     style="font-size:21.3333px;fill:#e60000"
+     x="437.23486"
+     y="414.0943"
+     id="text1"><tspan
+       x="437.23486"
+       y="414.0943"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:21.3333px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#080808;fill-opacity:1"
+       id="tspan3"
+       sodipodi:role="line">Heart Rate Zone 2</tspan><tspan
+       x="437.23486"
+       y="441.00787"
+       id="tspan2"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:21.3333px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#080808;fill-opacity:1"
+       sodipodi:role="line">(Endurance)</tspan></text>
 </svg>

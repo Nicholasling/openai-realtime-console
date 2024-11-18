@@ -17,8 +17,16 @@ app.use(cors({
 
 app.use(express.json());
 
-// Handle preflight requests for CORS
-app.options('/api/runs', cors());
+// Handle preflight requests for CORS + update to *globally
+// app.options('/api/runs', cors());
+// app.options('*', cors());
+// Handle preflight requests for CORS globally
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', allowedOrigin);
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.sendStatus(200);
+});
 
 // POST endpoint to create a new run
 app.post('/api/runs', async (req, res) => {
@@ -42,6 +50,34 @@ app.get('/api/runs', async (req, res) => {
     res.json(runs);
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve runs' });
+  }
+});
+
+
+// Add `/audio/speech` Endpoint with Explicit CORS Headers
+app.post('/audio/speech', async (req, res) => {
+  const { model, voice, input } = req.body;
+
+  // Validate the request
+  if (!model || !voice || !input) {
+    return res.status(400).json({ error: 'Missing required parameters' });
+  }
+
+  try {
+    // Simulate TTS processing (replace this with actual TTS logic)
+    const audioData = `Simulated audio for: ${input}`;
+    const audioBuffer = Buffer.from(audioData);
+
+    // Add CORS headers for the response
+    res.header('Access-Control-Allow-Origin', allowedOrigin);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    // Set response type for MP3 and send audio buffer
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.status(200).send(audioBuffer);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to process TTS request' });
   }
 });
 

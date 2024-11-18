@@ -75,7 +75,7 @@ It will start automatically on `localhost:8081`.
 **You will need to create a `.env` file** with the following configuration:
 
 ```conf
-OPENAI_API_KEY=YOUR_API_KEY
+REACT_APP_OPENAI_API_KEY=YOUR_API_KEY
 REACT_APP_LOCAL_RELAY_SERVER_URL=http://localhost:8081
 ```
 
