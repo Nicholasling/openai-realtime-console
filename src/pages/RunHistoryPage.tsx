@@ -37,7 +37,9 @@ const RunHistoryPage = () => {
   useEffect(() => {
     const fetchRuns = async () => {
       try {
-        const response = await fetch('https://glorious-space-guacamole-75q6v64xgqhwrqx-3001.app.github.dev/api/runs');
+        // const response = await fetch('https://glorious-space-guacamole-75q6v64xgqhwrqx-3001.app.github.dev/api/runs');
+        const response = await fetch('https://openai-realtime-console-zxx5.onrender.com/api/runs');
+        
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
