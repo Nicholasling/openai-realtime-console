@@ -15,6 +15,8 @@ const RunHistoryPage = () => {
   const [runs, setRuns] = useState<Run[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false); // State to toggle showing all cards
+
   const getZoneColor = (zone: string): string => {
     switch (zone) {
       case "Zone 1 (Warm-up)":
@@ -22,7 +24,7 @@ const RunHistoryPage = () => {
       case "Zone 2 (Endurance)":
         return "#98FF98"; // Lime green
       case "Zone 3 (Cardio)":
-        return "#FFEB3B"; // yellow
+        return "#FFEB3B"; // Yellow
       case "Zone 4 (Hard)":
         return "#FF7F50"; // Orange
       case "Zone 5 (Max Effort)":
@@ -31,12 +33,11 @@ const RunHistoryPage = () => {
         return "#555"; // Gray for 'Not in range'
     }
   };
-  
+
   useEffect(() => {
     const fetchRuns = async () => {
       try {
-        // const response = await fetch('https://symmetrical-goldfish-95vr7r4rpp3vjq-3001.app.github.dev/api/runs');
-        const response = await fetch('https://openai-realtime-console-zxx5.onrender.com/api/runs');
+        const response = await fetch('https://glorious-space-guacamole-75q6v64xgqhwrqx-3001.app.github.dev/api/runs');
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
@@ -60,32 +61,42 @@ const RunHistoryPage = () => {
     return <p>Error: {error}</p>;
   }
 
+  const displayedRuns = showAll ? runs : runs.slice(0, 3);
+
   return (
     <div className="run-history-container">
       <h1>Run History</h1>
       <ul className="run-list">
-        {runs.length > 0 ? (
-          runs.map((run) => (
+        {displayedRuns.length > 0 ? (
+          displayedRuns.map((run) => (
             <li key={run.id} className="run-card">
-              {/* <strong>{run.runName}</strong> - Time: {run.time}, Distance: {run.distance.toFixed(2)} km, Pace: {run.pace} per km, Heart Rate: {run.heartrate} BPM, Heart Rate Zone: {run.heartratezone} */}
               <p className="run-card-title">{run.runName}</p>
               <p className="run-card-details">
-                <span className="metric-key">Time:</span> <span className="metric-value">{run.time}  </span> 
-                <span className="metric-key">Distance:</span> <span className="metric-value">{run.distance.toFixed(2)} km  </span> 
-                <span className="metric-key">Pace:</span> <span className="metric-value">{run.pace} per km  </span> 
-                <span className="metric-key">Heart Rate:</span> <span className="metric-value">{run.heartrate} BPM  </span> 
-                {/* <span className="metric-key">Heart Rate Zone:</span> <span className="metric-value">{run.heartratezone}</span> */}
-                <p className="heart-rate-zone-badge" style={{ backgroundColor: getZoneColor(run.heartratezone) }}>
-                  {run.heartratezone}
-                </p>
+                <span className="metric-key">Time:</span> <span className="metric-value">{run.time}</span>
+                <span className="metric-key">Distance:</span> <span className="metric-value">{run.distance.toFixed(2)} km</span>
+                <span className="metric-key">Pace:</span> <span className="metric-value">{run.pace} per km</span>
+                <span className="metric-key">Heart Rate:</span> <span className="metric-value">{run.heartrate} BPM</span>
               </p>
-
+              <p
+                className="heart-rate-zone-badge"
+                style={{ backgroundColor: getZoneColor(run.heartratezone) }}
+              >
+                {run.heartratezone}
+              </p>
             </li>
           ))
         ) : (
           <p>No runs recorded yet.</p>
         )}
       </ul>
+      {runs.length > 3 && (
+        <button
+          className="toggle-button"
+          onClick={() => setShowAll(!showAll)}
+        >
+          {showAll ? "Show Less" : "Show More"}
+        </button>
+      )}
     </div>
   );
 };
