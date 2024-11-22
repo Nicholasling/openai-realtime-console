@@ -8,22 +8,65 @@ const AboutPage: React.FC = () => {
     <div className="about-page">
       <header className="about-header">
         <h1>Train Smarter, Not Harder with RunBuddy</h1>
-        <h2><em>Your ultimate running companion, guiding every stride with purpose and precision.</em></h2>
+        {/* <h2><em>Your ultimate running companion, guiding every stride with purpose and precision.</em></h2> */}
       </header>
 
       <section className="about-content">
-        <p>
+        {/* <p>
           At <span className="highlight">RunBuddy</span>, we empower runners to unlock their full potential with smarter, more efficient training. Every stride is meaningful, and every heartbeat fuels progress.
-        </p>
+        </p> */}
 
-        <div className="about-values">
-          <h3>Our Values:</h3>
-          <ul>
-            <li><strong>Efficiency:</strong> Maximize every run with real-time guidance.</li>
-            <li><strong>Safety:</strong> Train smart and stay injury-free.</li>
-            <li><strong>Joy:</strong> Celebrate every milestone and rediscover the fun in running.</li>
-          </ul>
+        <div className="app-screen">
+          <div className="content-section">
+            <div className="content-card">
+              <div className="card-inner">
+                {/* <!-- Front side of the card --> */}
+                <div className="card-front">
+                  <img src="/heart-image.jpg" alt="Exercise" />
+                  <div className="card-title">Heart Rate Zone</div>
+                </div>
+                {/* <!-- Back side of the card --> */}
+                <div className="card-back">
+                  <p>Training with heart rate zones <strong>tunes into your effort</strong> — whether you're building endurance, burning fat, or pushing your limits for speed!</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-card">
+              <div className="card-inner">
+                <div className="card-front">
+                  <img src="/pace-image.jpg" alt="Sleep" />
+                  <div className="card-title">Pace</div>
+                </div>
+                <div className="card-back">
+                  <p>Training with pace keeps you <strong>in control</strong> — run slow to go far, run fast to get strong, and find your rhythm to make every run count!</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-card">
+              <div className="card-inner">
+                <div className="card-front">
+                  <img src="/time-image.jpg" alt="Time" />
+                  <div className="card-title">Time</div>
+                </div>
+                <div className="card-back">
+                  <p>Training with time lets you focus on <strong>consistency</strong> - run for minutes, not miles, and watch your endurance grow!</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-card">
+              <div className="card-inner">
+                <div className="card-front">
+                  <img src="/cadence-image.jpg" alt="Cadence" />
+                  <div className="card-title">Cadence</div>
+                </div>
+                <div className="card-back">
+                  <p>Training with cadence is all about <strong>rhythm</strong> - keep those steps quick and light for a smoother, more efficient run!</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
       </section>
 
       <footer className="about-footer">
